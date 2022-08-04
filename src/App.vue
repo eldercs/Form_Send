@@ -1,17 +1,43 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+<div class = "text-center md:text-left">
+  <Buttons
+    classBtn="btn-blue"
+    :textBtn="this.address[0].name"
+    @click="openPop(1)"
+  />
+  <Buttons
+    classBtn="btn-black-green"
+    :textBtn="this.address[1].name"
+    @click="openPop(2)"
+  />
+  <Popup_Form  />
+</div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Buttons from "./components/Buttons.vue";
+import Popup_Form from "./components/Popup_Form.vue";
 
 export default {
-  name: 'App',
+  data() {
+    return {
+
+      address: this.$store.state.address,
+      data: {},
+    };
+  },
+  methods: {
+    openPop(city) {
+      this.$store.state.isOpen = true;
+      this.$store.state.choseCity = city
+    },
+  },
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Buttons,
+    Popup_Form
+},
+};
 </script>
 
 <style lang="scss">
@@ -19,8 +45,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  margin-top: 20px;
 }
 </style>
